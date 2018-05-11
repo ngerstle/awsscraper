@@ -1,0 +1,98 @@
+{% extends "layout.html" %} {% block content %}
+<main class="about-section">
+  <div class="container">
+
+    <center>
+      <h3>Route53 records</h3>
+      <p uk-margin>
+        <a class="uk-button uk-button-default" href="data:application/csv;base64,{{ dnss | toCSV(['IP','Name','Account','Type','Public','Private','Unresolved']) | b64encode }}"> CSV </a>
+        <a class="uk-button uk-button-default" href="data:application/json;base64,{{ dnss | tojsonc('DNS') | b64encode  }}" target="_blank"> JSON </a>
+      </p>
+      <br>
+
+      <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+        <thread>
+          <tr>
+            <th>IP</th>
+            <th>DNS</th>
+            <th>Account</th>
+            <th>Type</th>
+            <th>Public</th>
+            <th>Private</th>
+            <th>Unresolved</th>
+          </tr>
+        </thread>
+        <tbody>
+          {% for dns in dnss %}
+          <tr>
+            <td>{{ dns.IP }}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{ dns.Name }}</td>
+            <td> {{dns.Account}}</td>
+            <td>{{ dns.Type }}</td>
+            <td>{{ dns.Public }}</td>
+            <td>{{ dns.Private }}</td>
+            <td>{{ dns.Unresolved }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <br><br>
+      <h3> Route53 TLDS </h3>
+      <p uk-margin>
+        <a class="uk-button uk-button-default" href="data:application/csv;base64,{{ tlds | toCSV(['TLD','Account']) | b64encode  }}"> CSV </a>
+        <a class="uk-button uk-button-default" href="data:application/json;base64,{{ tlds | tojsonc('TLD') | b64encode  }}" target="_blank"> JSON </a>
+      </p>
+      <br>
+      <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+        <thread>
+          <tr>
+            <th>TLD</th>
+            <th>Account</th>
+          </tr>
+        </thread>
+        <tbody>
+          {% for tld in tlds %}
+          <tr>
+            <td>{{tld.TLD}}</td>
+            <td>{{tld.Account}} </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <br><br>
+      <h3>Elastic IPs</h3>
+      <p uk-margin>
+        <a class="uk-button uk-button-default" href="data:application/csv;base64,{{ eips | toCSV(['Account','Region','PublicIp','PrivateIp','InstanceId']) | b64encode }}"> CSV </a>
+        <a class="uk-button uk-button-default" href="data:application/json;base64,{{ eips | tojsonc('EIP') | b64encode  }}" target="_blank"> JSON </a>
+      </p>
+      <br>
+      <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+        <thread>
+          <tr>
+            <th>Account name</th>
+            <th>Region</th>
+            <th>Public IP</th>
+            <th>Private IP</th>
+            <th>Attached Instance ID</th>
+          </tr>
+        </thread>
+        <tbody>
+          {% for eip in eips %}
+          <tr>
+            <td> {{eip.Account}} </td>
+            <td> {{eip.Region}} </td>
+            <td> {{eip.PublicIp}} </td>
+            <td> {{eip.PrivateIp}} </td>
+            <td> {{eip.InstanceId}} </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {# #}
+      <h4> Scan time: {{scan_time}} </h4>
+    </center>
+
+  </div>
+</main>
+{% endblock %}

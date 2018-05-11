@@ -1,0 +1,14 @@
+{% extends "layout.html" %} {% block content %}
+
+API endpoints:
+<ul>
+    <li> <a href="/api/_/alljson">/api/_/alljson</a> returns the results of scanning all teams as a JSON object </li>
+    <li> <a href="/api/_/allcsv">/api/_/allcsv</a> returns the results of scanning all teams as a malformed CSV </li>
+    <li> <a href="/api/json/teamname">/api/json/teamname</a> returns the results of scanning 'teamname' as json </li>
+    <li> <a href="/api/csv/teamname">/api/csv/teamname</a> returns the results of scanning 'teamname' as a malformed csv </li>
+    <li> <a href="/team/teamname">/team/teamname</a> returns the results of scanning 'teamname' as a nice html page, with csv and json downloads of each table </li>
+</ul>
+
+{% endblock %}
+
+

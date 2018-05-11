@@ -1,0 +1,9 @@
+{% extends "layout.html" %} {% block content %}
+<main class="hero-section">
+  <div class="container">
+Scan started for team {{teamname}} at time {{time}}
+      <br>
+      Please go to <a href="/team/{{teamname}}"> {{teamname}} </a>
+  </div>
+</main>
+{% endblock %}

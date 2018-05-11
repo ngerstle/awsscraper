@@ -1,0 +1,16 @@
+Scan time: {{scan_time}}
+
+Route53,{{ dnss | length }}
+IP,DNS,Account,Team,Type,Public,Private,Unresolved
+{% for dns in dnss %}{{ dns.IP }},{{ dns.Name }},{{dns.Account}},{{dns.Team}},{{ dns.Type }},{{ dns.Public }},{{ dns.Private }},{{ dns.Unresolved }}
+{% endfor %}
+
+Top Level Domains,{{ tlds | length }}
+TLD,Account,Team
+{% for tld in tlds %}{{tld.TLD}},{{tld.Account}},{{tld.Team}}
+{% endfor %}
+
+Elastic IPs,{{ eips | length }}
+Account name,Team,Region,Public IP,Private IP,Attached Instance ID
+{% for eip in eips %}{{eip.Account}},{{eip.Team}},{{eip.Region}},{{eip.PublicIp}},{{eip.PrivateIp}},{{eip.InstanceId}}
+{% endfor %}
